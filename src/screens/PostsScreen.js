@@ -1,12 +1,28 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { useState, useEffect } from "react";
 
-export default function PostsScreen() {
+
+
+import DefaultScreen from "./NestedScreens/DefaultScreen";
+
+import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
+
+
+
+
+export default function PostsScreen({ }) {
+
+    const { Navigator, Screen } = createStackNavigator();
+
+
+
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>PostsScreen</Text>
-            <StatusBar style="auto" />
-        </View>
+
+        <Navigator initialRouteName={"Default"}>
+            <Screen name="Default" component={DefaultScreen} />
+            <Screen name="Map" component={DefaultScreen} />
+            <Screen name="Comments" component={DefaultScreen} />
+        </Navigator>
     )
 }
 
@@ -15,8 +31,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    text: {
-        fontSize: 36,
-        textAlign: 'center',
-    }
+
+
 });

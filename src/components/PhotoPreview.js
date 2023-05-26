@@ -1,4 +1,4 @@
-import {  View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
 export default function PhotoPreview({ photo, onCancel }) {
