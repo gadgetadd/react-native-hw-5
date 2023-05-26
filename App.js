@@ -7,10 +7,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 
 
-import RegistrationScreen from './src/screens/RegistrationScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import PostsScreen from './src/screens/PostsScreen';
-import Home from './src/screens/Home';
+import RegistrationScreen from './src/screens/Auth/RegistrationScreen';
+import LoginScreen from './src/screens/Auth/LoginScreen';
+import PostsScreen from './src/screens/Main/PostsScreen';
+import Home from './src/screens/Main/Home';
 
 export default function App() {
 

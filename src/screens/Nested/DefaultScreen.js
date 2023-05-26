@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-// import placeholder from '../assets/images/temp.jpg'
+import placeholder from '../../assets/images/temp.jpg'
 
 
-import PostItem from "../components/PostItem";
+import PostItem from "../../components/PostItem";
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';

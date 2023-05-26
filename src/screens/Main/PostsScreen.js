@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 
-
-import DefaultScreen from "./NestedScreens/DefaultScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+import DefaultScreen from "../Nested/DefaultScreen";
 
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 

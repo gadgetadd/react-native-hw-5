@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Text, TextInput, Button, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 
-import CameraPreview from "../components/CameraPreview";
-import PhotoPreview from "../components/PhotoPreview";
+import CameraPreview from "../../components/CameraPreview";
+import PhotoPreview from "../../components/PhotoPreview";
 import * as Location from "expo-location";
 import uuid from 'react-native-uuid';
 

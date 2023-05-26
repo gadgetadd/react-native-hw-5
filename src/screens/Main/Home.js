@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fontisto } from '@expo/vector-icons';
 import PostsScreen from './PostsScreen';
 import ProfileScreen from './ProfileScreen';
-import LogOutBtn from "../components/LogOutBtn";
+import LogOutBtn from "../../components/LogOutBtn";
 import CreatePostsScreen from './CreatePostsScreen';
 
 

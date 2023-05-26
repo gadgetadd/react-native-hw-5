@@ -14,8 +14,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import background from '../assets/images/background.jpg'
 import { Fontisto } from '@expo/vector-icons';
+import background from '../../assets/images/background.jpg'
 
 
 export default function RegistrationScreen() {
