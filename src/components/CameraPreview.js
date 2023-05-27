@@ -11,8 +11,6 @@ export default function CameraPreview({ onCapture }) {
     const [cameraRef, setCameraRef] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
 
-
-
     useEffect(() => {
         (async () => {
             const { status } = await Camera.requestCameraPermissionsAsync();
@@ -24,6 +22,7 @@ export default function CameraPreview({ onCapture }) {
     if (hasPermission === null) {
         return <View />;
     }
+
     if (hasPermission === false) {
         return <Text>No access to camera</Text>;
     }
@@ -52,9 +51,8 @@ export default function CameraPreview({ onCapture }) {
                     style={styles.captureBtn}
                     onPress={async () => {
                         if (cameraRef) {
-                            const cache = await cameraRef.takePictureAsync();
-                            const file = await MediaLibrary.createAssetAsync(cache.uri);
-                            onCapture(file.uri);
+                            const photo = await cameraRef.takePictureAsync();
+                            onCapture(photo.uri);
                         }
                     }}
                 >
@@ -69,15 +67,14 @@ const styles = StyleSheet.create({
     camera: {
         width: '100%',
         height: '100%',
+        borderRadius: 5,
     },
-
     photoView: {
         flex: 1,
         backgroundColor: "transparent",
         justifyContent: "flex-end",
         padding: 20,
     },
-
     flipBtn: {
         position: "absolute",
         bottom: 20,
@@ -86,13 +83,10 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 50,
     },
-
     captureBtn: {
         alignSelf: "center",
         backgroundColor: '#0005',
         padding: 5,
         borderRadius: 50,
     },
-
-
 });

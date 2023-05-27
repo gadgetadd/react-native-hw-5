@@ -1,6 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native';
 
-
 export default function ProfileScreen() {
     return (
         <View style={styles.container}>
@@ -8,7 +7,6 @@ export default function ProfileScreen() {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

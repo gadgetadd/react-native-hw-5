@@ -1,15 +1,10 @@
-
 import 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-
-
 import RegistrationScreen from './src/screens/Auth/RegistrationScreen';
 import LoginScreen from './src/screens/Auth/LoginScreen';
-import PostsScreen from './src/screens/Main/PostsScreen';
 import Home from './src/screens/Main/Home';
 
 export default function App() {
@@ -30,12 +25,14 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
         <Screen name="Register" component={RegistrationScreen} />
         <Screen name="Login" component={LoginScreen} />
         <Screen name="Home" component={Home} />
       </Navigator>
-      <StatusBar style="light" />
     </NavigationContainer>
   );
 }

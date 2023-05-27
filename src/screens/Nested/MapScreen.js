@@ -1,9 +1,27 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import MapView, { Marker } from "react-native-maps";
 
-export default function MapScreen() {
+export default function MapScreen({ route }) {
+
+    const { latitude, longitude } = route.params;
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>MapScreen</Text>
+            <MapView
+                style={styles.mapStyle}
+                region={{
+                    latitude,
+                    longitude,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+                mapType="standard"
+                minZoomLevel={15}
+            >
+                <Marker
+                    coordinate={{ latitude, longitude }}
+                />
+            </MapView>
         </View>
     )
 }
@@ -13,8 +31,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    text: {
-        fontSize: 36,
-        textAlign: 'center',
-    }
+    mapStyle: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+    },
 });

@@ -12,15 +12,14 @@ import {
     Keyboard,
     ImageBackground
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
 import { Fontisto } from '@expo/vector-icons';
 import background from '../../assets/images/background.jpg'
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
 
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-    const navigation = useNavigation();
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleLogin = () => {
         const formData = { login, password }
@@ -28,38 +27,52 @@ export default function LoginScreen() {
         setLogin('');
         setPassword('');
         navigation.navigate("Home")
-    }
+    };
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <ImageBackground source={background} style={styles.container} resizeMode="cover">
-                <View style={styles.form}>
-                    <View style={styles.icon}>
-                        <Fontisto name="person" size={80} color="#767b91" />
+        <>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <ImageBackground
+                    source={background}
+                    style={styles.container}
+                    resizeMode="cover">
+                    <View style={styles.form}>
+                        <View style={styles.icon}>
+                            <Fontisto
+                                name="person"
+                                size={80}
+                                color="#767b91"
+                            />
+                        </View>
+                        <Text style={styles.title}>Login</Text>
+                        <KeyboardAvoidingView enabled behavior={Platform.OS == "ios" ? "padding" : "height"}>
+                            <TextInput
+                                value={login}
+                                onChangeText={setLogin}
+                                style={styles.input}
+                                placeholder="Login"
+                            />
+                            <TextInput
+                                value={password}
+                                onChangeText={setPassword}
+                                style={styles.input}
+                                placeholder="Password"
+                                secureTextEntry
+                            />
+                        </KeyboardAvoidingView>
+                        <Button
+                            title="Login"
+                            color="#FF6C00"
+                            onPress={handleLogin}
+                        />
+                        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                            <Text style={styles.text}>Don't have an account? Register</Text>
+                        </TouchableOpacity>
                     </View>
-                    <Text style={styles.title}>Login</Text>
-                    <KeyboardAvoidingView enabled behavior={Platform.OS == "ios" ? "padding" : "height"}>
-                        <TextInput
-                            value={login}
-                            onChangeText={setLogin}
-                            style={styles.input}
-                            placeholder="Login"
-                        />
-                        <TextInput
-                            value={password}
-                            onChangeText={setPassword}
-                            style={styles.input}
-                            placeholder="Password"
-                            secureTextEntry
-                        />
-                    </KeyboardAvoidingView>
-                    <Button title="Login" color="#FF6C00" onPress={handleLogin} />
-                    <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                        <Text style={styles.text}>Don't have an account? Register</Text>
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground >
-        </TouchableWithoutFeedback >
+                </ImageBackground >
+            </TouchableWithoutFeedback >
+            <StatusBar style="light" />
+        </>
     )
 }
 
@@ -102,10 +115,9 @@ const styles = StyleSheet.create({
         height: 40,
         width: '100%',
         backgroundColor: 'whitesmoke',
-        marginBottom: 30,
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
-        marginBottom: 10,
+        marginBottom: 20,
     },
 });

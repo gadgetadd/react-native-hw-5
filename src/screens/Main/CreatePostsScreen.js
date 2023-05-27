@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Text, TextInput, Button, View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { TextInput, Button, View, StyleSheet } from "react-native";
+import uuid from 'react-native-uuid';
+import * as Location from "expo-location";
 
 import CameraPreview from "../../components/CameraPreview";
 import PhotoPreview from "../../components/PhotoPreview";
-import * as Location from "expo-location";
-import uuid from 'react-native-uuid';
 
-
-export default function CreatePostsScreen({ }) {
-
+export default function CreatePostsScreen({ navigation }) {
 
     const [photo, setPhoto] = useState(null);
     const [title, setTitle] = useState('');
-    const [place, setPlace] = useState('')
+    const [place, setPlace] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -20,15 +18,20 @@ export default function CreatePostsScreen({ }) {
             if (status !== "granted") {
                 console.log("Permission to access location was denied");
             }
-
-
         })();
     }, []);
 
+    const formReset = () => {
+        setPhoto(null);
+        setTitle('');
+        setPlace('');
+    }
 
     const handleAddNewPost = async () => {
-        const location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest, maximumAge: 10000 });
-
+        const location = await Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.Highest,
+            maximumAge: 10000
+        });
         const newPost = {
             id: uuid.v1(),
             photo,
@@ -37,16 +40,20 @@ export default function CreatePostsScreen({ }) {
             location: {
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
-            }
+            },
+            comments: []
         }
-        console.log(newPost);
-
+        navigation.navigate("DefaultScreen", newPost);
+        formReset();
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.photoContainer}>
-                {photo ? <PhotoPreview photo={photo} onCancel={() => setPhoto(null)} /> : <CameraPreview onCapture={setPhoto} />}
+                {photo
+                    ? <PhotoPreview photo={photo} onCancel={() => setPhoto(null)} />
+                    : <CameraPreview onCapture={setPhoto} />
+                }
             </View>
             <TextInput
                 value={title}
@@ -58,7 +65,11 @@ export default function CreatePostsScreen({ }) {
                 onChangeText={setPlace}
                 style={styles.input}
                 placeholder="Location"
-            /><Button title='Post' onPress={handleAddNewPost} />
+            /><Button
+                title='Post'
+                onPress={handleAddNewPost}
+                color="#FF6C00"
+            />
         </View >
     )
 }
@@ -67,15 +78,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        paddingVertical: 10,
     },
     photoContainer: {
+        marginTop: 10,
+        marginBottom: 20,
+        width: '100%',
         aspectRatio: 3 / 4,
     },
     input: {
-        marginVertical: 5,
+        height: 40,
+        width: '100%',
+        backgroundColor: 'white',
         borderWidth: 1,
-        padding: 4,
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 20,
     },
-
 });
